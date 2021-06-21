@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ecommerceModelStoreContainer" CdmEntityContainer="ecommerceEntities">
+    <EntitySetMapping Name="categories">
+      <EntityTypeMapping TypeName="ecommerceModel.category">
+        <MappingFragment StoreEntitySet="category">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="options">
+      <EntityTypeMapping TypeName="ecommerceModel.option">
+        <MappingFragment StoreEntitySet="option">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="option_value">
+      <EntityTypeMapping TypeName="ecommerceModel.option_value">
+        <MappingFragment StoreEntitySet="option_value">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="idOption" ColumnName="idOption" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="ecommerceModel.product">
+        <MappingFragment StoreEntitySet="product">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="variants">
+      <EntityTypeMapping TypeName="ecommerceModel.variant">
+        <MappingFragment StoreEntitySet="variant">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="variant_option">
+      <EntityTypeMapping TypeName="ecommerceModel.variant_option">
+        <MappingFragment StoreEntitySet="variant_option">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idVariant" ColumnName="idVariant" />
+          <ScalarProperty Name="idOptionValue" ColumnName="idOptionValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
