@@ -4,18 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9a00ae80ef794cde9d7fb0c07dec70e7" Name="Diagram1">
-        <EntityTypeShape EntityType="ecommerceModel.category" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.option" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.option_value" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.product" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.variant" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecommerceModel.variant_option" Width="1.5" PointX="7.5" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="ecommerceModel.FK__product__idCateg__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK__option_va__idOpt__534D60F1" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK__variant_o__idOpt__571DF1D5" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK__variant__idProdu__4E88ABD4" ManuallyRouted="false" />
-        <AssociationConnector Association="ecommerceModel.FK__variant_o__idVar__5629CD9C" ManuallyRouted="false" />
+      <Diagram DiagramId="cca149af3e574b52be0b0852443067cc" Name="Diagram1" ZoomLevel="103">
+        <EntityTypeShape EntityType="product_has_attributeModel.attribute" Width="1.5" PointX="2.625" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="product_has_attributeModel.product" Width="1.5" PointX="2.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="product_has_attributeModel.product_attribute" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="product_has_attributeModel.variant" Width="1.5" PointX="4.625" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="product_has_attributeModel.variant_attribute" Width="1.5" PointX="6.625" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="product_has_attributeModel.FK__product_a__attri__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="product_has_attributeModel.FK__variant_a__attri__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="product_has_attributeModel.FK__product_a__produ__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="product_has_attributeModel.FK__variant__idProdu__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="product_has_attributeModel.FK__variant_a__varia__5535A963" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

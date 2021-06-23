@@ -12,18 +12,13 @@ namespace ecommerce.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class option
+    public partial class product_attribute
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public option()
-        {
-            this.option_value = new HashSet<option_value>();
-        }
-    
         public int id { get; set; }
-        public string name { get; set; }
+        public Nullable<int> product_id { get; set; }
+        public Nullable<int> attribute_id { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<option_value> option_value { get; set; }
+        public virtual attribute attribute { get; set; }
+        public virtual product product { get; set; }
     }
 }

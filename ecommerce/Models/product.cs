@@ -17,14 +17,16 @@ namespace ecommerce.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public product()
         {
+            this.product_attribute = new HashSet<product_attribute>();
             this.variants = new HashSet<variant>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
-        public Nullable<int> idCategory { get; set; }
+        public Nullable<int> price { get; set; }
     
-        public virtual category category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<product_attribute> product_attribute { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<variant> variants { get; set; }
     }

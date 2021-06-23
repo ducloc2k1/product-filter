@@ -12,11 +12,13 @@ namespace ecommerce.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
-    public partial class ecommerceEntities : DbContext
+    public partial class product_has_attributeEntities : DbContext
     {
-        public ecommerceEntities()
-            : base("name=ecommerceEntities")
+        public product_has_attributeEntities()
+            : base("name=product_has_attributeEntities")
         {
         }
     
@@ -25,11 +27,15 @@ namespace ecommerce.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<category> categories { get; set; }
-        public virtual DbSet<option> options { get; set; }
-        public virtual DbSet<option_value> option_value { get; set; }
+        public virtual DbSet<attribute> attributes { get; set; }
         public virtual DbSet<product> products { get; set; }
+        public virtual DbSet<product_attribute> product_attribute { get; set; }
         public virtual DbSet<variant> variants { get; set; }
-        public virtual DbSet<variant_option> variant_option { get; set; }
+        public virtual DbSet<variant_attribute> variant_attribute { get; set; }
+    
+        public virtual ObjectResult<getProductWithAttribute_Result1> getProductWithAttribute()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getProductWithAttribute_Result1>("getProductWithAttribute");
+        }
     }
 }

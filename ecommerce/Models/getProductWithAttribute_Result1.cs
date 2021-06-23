@@ -10,15 +10,12 @@
 namespace ecommerce.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class variant_option
+    public partial class getProductWithAttribute_Result1
     {
         public int id { get; set; }
-        public Nullable<int> idVariant { get; set; }
-        public Nullable<int> idOptionValue { get; set; }
-    
-        public virtual option_value option_value { get; set; }
-        public virtual variant variant { get; set; }
+        public string name { get; set; }
+        public string attribute_name { get; set; }
+        public string attribute_value { get; set; }
     }
 }

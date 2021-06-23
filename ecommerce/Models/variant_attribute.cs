@@ -12,18 +12,13 @@ namespace ecommerce.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class category
+    public partial class variant_attribute
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public category()
-        {
-            this.products = new HashSet<product>();
-        }
-    
         public int id { get; set; }
-        public string name { get; set; }
+        public Nullable<int> variant_id { get; set; }
+        public Nullable<int> attribute_id { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<product> products { get; set; }
+        public virtual attribute attribute { get; set; }
+        public virtual variant variant { get; set; }
     }
 }

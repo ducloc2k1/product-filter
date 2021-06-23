@@ -1,98 +1,92 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="ecommerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="category">
+<Schema Namespace="product_has_attributeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="attribute">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="products" Relationship="Self.FK__product__idCateg__4BAC3F29" FromRole="category" ToRole="product" />
-  </EntityType>
-  <EntityType Name="option">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="option_value" Relationship="Self.FK__option_va__idOpt__534D60F1" FromRole="option" ToRole="option_value" />
-  </EntityType>
-  <EntityType Name="option_value">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="idOption" Type="Int32" />
-    <NavigationProperty Name="option" Relationship="Self.FK__option_va__idOpt__534D60F1" FromRole="option_value" ToRole="option" />
-    <NavigationProperty Name="variant_option" Relationship="Self.FK__variant_o__idOpt__571DF1D5" FromRole="option_value" ToRole="variant_option" />
+    <Property Name="attribute_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="product_attribute" Relationship="Self.FK__product_a__attri__4F7CD00D" FromRole="attribute" ToRole="product_attribute" />
+    <NavigationProperty Name="variant_attribute" Relationship="Self.FK__variant_a__attri__5629CD9C" FromRole="attribute" ToRole="variant_attribute" />
+    <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="product">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="idCategory" Type="Int32" />
-    <NavigationProperty Name="category" Relationship="Self.FK__product__idCateg__4BAC3F29" FromRole="product" ToRole="category" />
-    <NavigationProperty Name="variants" Relationship="Self.FK__variant__idProdu__4E88ABD4" FromRole="product" ToRole="variant" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Int32" />
+    <NavigationProperty Name="product_attribute" Relationship="Self.FK__product_a__produ__4E88ABD4" FromRole="product" ToRole="product_attribute" />
+    <NavigationProperty Name="variants" Relationship="Self.FK__variant__idProdu__52593CB8" FromRole="product" ToRole="variant" />
+  </EntityType>
+  <EntityType Name="product_attribute">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_id" Type="Int32" />
+    <Property Name="attribute_id" Type="Int32" />
+    <NavigationProperty Name="attribute" Relationship="Self.FK__product_a__attri__4F7CD00D" FromRole="product_attribute" ToRole="attribute" />
+    <NavigationProperty Name="product" Relationship="Self.FK__product_a__produ__4E88ABD4" FromRole="product_attribute" ToRole="product" />
   </EntityType>
   <EntityType Name="variant">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sku" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="idProduct" Type="Int32" />
-    <NavigationProperty Name="product" Relationship="Self.FK__variant__idProdu__4E88ABD4" FromRole="variant" ToRole="product" />
-    <NavigationProperty Name="variant_option" Relationship="Self.FK__variant_o__idVar__5629CD9C" FromRole="variant" ToRole="variant_option" />
+    <NavigationProperty Name="product" Relationship="Self.FK__variant__idProdu__52593CB8" FromRole="variant" ToRole="product" />
+    <NavigationProperty Name="variant_attribute" Relationship="Self.FK__variant_a__varia__5535A963" FromRole="variant" ToRole="variant_attribute" />
   </EntityType>
-  <EntityType Name="variant_option">
+  <EntityType Name="variant_attribute">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="idVariant" Type="Int32" />
-    <Property Name="idOptionValue" Type="Int32" />
-    <NavigationProperty Name="option_value" Relationship="Self.FK__variant_o__idOpt__571DF1D5" FromRole="variant_option" ToRole="option_value" />
-    <NavigationProperty Name="variant" Relationship="Self.FK__variant_o__idVar__5629CD9C" FromRole="variant_option" ToRole="variant" />
+    <Property Name="variant_id" Type="Int32" />
+    <Property Name="attribute_id" Type="Int32" />
+    <NavigationProperty Name="attribute" Relationship="Self.FK__variant_a__attri__5629CD9C" FromRole="variant_attribute" ToRole="attribute" />
+    <NavigationProperty Name="variant" Relationship="Self.FK__variant_a__varia__5535A963" FromRole="variant_attribute" ToRole="variant" />
   </EntityType>
-  <Association Name="FK__product__idCateg__4BAC3F29">
-    <End Role="category" Type="Self.category" Multiplicity="0..1" />
-    <End Role="product" Type="Self.product" Multiplicity="*" />
+  <Association Name="FK__product_a__attri__4F7CD00D">
+    <End Role="attribute" Type="Self.attribute" Multiplicity="0..1" />
+    <End Role="product_attribute" Type="Self.product_attribute" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="category">
+      <Principal Role="attribute">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="product">
-        <PropertyRef Name="idCategory" />
+      <Dependent Role="product_attribute">
+        <PropertyRef Name="attribute_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__option_va__idOpt__534D60F1">
-    <End Role="option" Type="Self.option" Multiplicity="0..1" />
-    <End Role="option_value" Type="Self.option_value" Multiplicity="*" />
+  <Association Name="FK__variant_a__attri__5629CD9C">
+    <End Role="attribute" Type="Self.attribute" Multiplicity="0..1" />
+    <End Role="variant_attribute" Type="Self.variant_attribute" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="option">
+      <Principal Role="attribute">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="option_value">
-        <PropertyRef Name="idOption" />
+      <Dependent Role="variant_attribute">
+        <PropertyRef Name="attribute_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__variant_o__idOpt__571DF1D5">
-    <End Role="option_value" Type="Self.option_value" Multiplicity="0..1" />
-    <End Role="variant_option" Type="Self.variant_option" Multiplicity="*" />
+  <Association Name="FK__product_a__produ__4E88ABD4">
+    <End Role="product" Type="Self.product" Multiplicity="0..1" />
+    <End Role="product_attribute" Type="Self.product_attribute" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="option_value">
+      <Principal Role="product">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="variant_option">
-        <PropertyRef Name="idOptionValue" />
+      <Dependent Role="product_attribute">
+        <PropertyRef Name="product_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__variant__idProdu__4E88ABD4">
+  <Association Name="FK__variant__idProdu__52593CB8">
     <End Role="product" Type="Self.product" Multiplicity="0..1" />
     <End Role="variant" Type="Self.variant" Multiplicity="*" />
     <ReferentialConstraint>
@@ -104,44 +98,55 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__variant_o__idVar__5629CD9C">
+  <Association Name="FK__variant_a__varia__5535A963">
     <End Role="variant" Type="Self.variant" Multiplicity="0..1" />
-    <End Role="variant_option" Type="Self.variant_option" Multiplicity="*" />
+    <End Role="variant_attribute" Type="Self.variant_attribute" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="variant">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="variant_option">
-        <PropertyRef Name="idVariant" />
+      <Dependent Role="variant_attribute">
+        <PropertyRef Name="variant_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="ecommerceEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="categories" EntityType="Self.category" />
-    <EntitySet Name="options" EntityType="Self.option" />
-    <EntitySet Name="option_value" EntityType="Self.option_value" />
+  <EntityContainer Name="product_has_attributeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="attributes" EntityType="Self.attribute" />
     <EntitySet Name="products" EntityType="Self.product" />
+    <EntitySet Name="product_attribute" EntityType="Self.product_attribute" />
     <EntitySet Name="variants" EntityType="Self.variant" />
-    <EntitySet Name="variant_option" EntityType="Self.variant_option" />
-    <AssociationSet Name="FK__product__idCateg__4BAC3F29" Association="Self.FK__product__idCateg__4BAC3F29">
-      <End Role="category" EntitySet="categories" />
+    <EntitySet Name="variant_attribute" EntityType="Self.variant_attribute" />
+    <AssociationSet Name="FK__product_a__attri__4F7CD00D" Association="Self.FK__product_a__attri__4F7CD00D">
+      <End Role="attribute" EntitySet="attributes" />
+      <End Role="product_attribute" EntitySet="product_attribute" />
+    </AssociationSet>
+    <AssociationSet Name="FK__variant_a__attri__5629CD9C" Association="Self.FK__variant_a__attri__5629CD9C">
+      <End Role="attribute" EntitySet="attributes" />
+      <End Role="variant_attribute" EntitySet="variant_attribute" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_a__produ__4E88ABD4" Association="Self.FK__product_a__produ__4E88ABD4">
       <End Role="product" EntitySet="products" />
+      <End Role="product_attribute" EntitySet="product_attribute" />
     </AssociationSet>
-    <AssociationSet Name="FK__option_va__idOpt__534D60F1" Association="Self.FK__option_va__idOpt__534D60F1">
-      <End Role="option" EntitySet="options" />
-      <End Role="option_value" EntitySet="option_value" />
-    </AssociationSet>
-    <AssociationSet Name="FK__variant_o__idOpt__571DF1D5" Association="Self.FK__variant_o__idOpt__571DF1D5">
-      <End Role="option_value" EntitySet="option_value" />
-      <End Role="variant_option" EntitySet="variant_option" />
-    </AssociationSet>
-    <AssociationSet Name="FK__variant__idProdu__4E88ABD4" Association="Self.FK__variant__idProdu__4E88ABD4">
+    <AssociationSet Name="FK__variant__idProdu__52593CB8" Association="Self.FK__variant__idProdu__52593CB8">
       <End Role="product" EntitySet="products" />
       <End Role="variant" EntitySet="variants" />
     </AssociationSet>
-    <AssociationSet Name="FK__variant_o__idVar__5629CD9C" Association="Self.FK__variant_o__idVar__5629CD9C">
+    <AssociationSet Name="FK__variant_a__varia__5535A963" Association="Self.FK__variant_a__varia__5535A963">
       <End Role="variant" EntitySet="variants" />
-      <End Role="variant_option" EntitySet="variant_option" />
+      <End Role="variant_attribute" EntitySet="variant_attribute" />
     </AssociationSet>
+    <FunctionImport Name="getProductWithAttribute" ReturnType="Collection(product_has_attributeModel.getProductWithAttribute_Result1)" />
   </EntityContainer>
+  <ComplexType Name="getProductWithAttribute_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="attribute_value" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="getProductWithAttribute_Result1">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="attribute_name" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="attribute_value" Nullable="true" MaxLength="50" />
+  </ComplexType>
 </Schema>

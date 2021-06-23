@@ -1,57 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ecommerceModelStoreContainer" CdmEntityContainer="ecommerceEntities">
-    <EntitySetMapping Name="categories">
-      <EntityTypeMapping TypeName="ecommerceModel.category">
-        <MappingFragment StoreEntitySet="category">
-          <ScalarProperty Name="id" ColumnName="id" />
+  <EntityContainerMapping StorageEntityContainer="product_has_attributeModelStoreContainer" CdmEntityContainer="product_has_attributeEntities">
+    <EntitySetMapping Name="attributes">
+      <EntityTypeMapping TypeName="product_has_attributeModel.attribute">
+        <MappingFragment StoreEntitySet="attribute">
           <ScalarProperty Name="name" ColumnName="name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="options">
-      <EntityTypeMapping TypeName="ecommerceModel.option">
-        <MappingFragment StoreEntitySet="option">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="option_value">
-      <EntityTypeMapping TypeName="ecommerceModel.option_value">
-        <MappingFragment StoreEntitySet="option_value">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="code" ColumnName="code" />
-          <ScalarProperty Name="idOption" ColumnName="idOption" />
+          <ScalarProperty Name="attribute_value" ColumnName="attribute_value" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="products">
-      <EntityTypeMapping TypeName="ecommerceModel.product">
+      <EntityTypeMapping TypeName="product_has_attributeModel.product">
         <MappingFragment StoreEntitySet="product">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="product_attribute">
+      <EntityTypeMapping TypeName="product_has_attributeModel.product_attribute">
+        <MappingFragment StoreEntitySet="product_attribute">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="attribute_id" ColumnName="attribute_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="variants">
-      <EntityTypeMapping TypeName="ecommerceModel.variant">
+      <EntityTypeMapping TypeName="product_has_attributeModel.variant">
         <MappingFragment StoreEntitySet="variant">
           <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sku" ColumnName="sku" />
           <ScalarProperty Name="idProduct" ColumnName="idProduct" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="variant_option">
-      <EntityTypeMapping TypeName="ecommerceModel.variant_option">
-        <MappingFragment StoreEntitySet="variant_option">
+    <EntitySetMapping Name="variant_attribute">
+      <EntityTypeMapping TypeName="product_has_attributeModel.variant_attribute">
+        <MappingFragment StoreEntitySet="variant_attribute">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="idVariant" ColumnName="idVariant" />
-          <ScalarProperty Name="idOptionValue" ColumnName="idOptionValue" />
+          <ScalarProperty Name="variant_id" ColumnName="variant_id" />
+          <ScalarProperty Name="attribute_id" ColumnName="attribute_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="getProductWithAttribute" FunctionName="product_has_attributeModel.Store.getProductWithAttribute">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="product_has_attributeModel.getProductWithAttribute_Result1">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="attribute_name" ColumnName="attribute_name" />
+          <ScalarProperty Name="attribute_value" ColumnName="attribute_value" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -10,41 +10,83 @@ using ecommerce.Models;
 
 namespace ecommerce.Controllers
 {
-    public class ProductController : Controller
+    public class ProductsController : Controller
     {
-        private ecommerceEntities db = new ecommerceEntities();
+        private product_has_attributeEntities db = new product_has_attributeEntities();
 
-        // GET: Product
+        // GET: Products
         public ActionResult Index()
         {
-            string filter_size = Request.Params["filter_size"];
+            IEnumerable<getProductWithAttribute_Result1> filterList = null;
 
-            var lstFilter_size = filter_size.Split(',');
-
-            if (lstFilter_size.Length > 0)
+            try
             {
-                var variants = db.variants.ToList();
+                var productWithAttr = db.getProductWithAttribute().ToList();
 
-                var filterVariants = variants
-                .Where((variant) =>
+                string filter_size = Request.Params["filter_size"];
+
+                //Filter size
+                var lstFilter_size = filter_size.Split(',');
+
+
+                if (lstFilter_size.Length > 0)
                 {
-                    foreach (var size in lstFilter_size)
-                    {
-                        var idOption = db.option_value.FirstOrDefault(optionValue => optionValue.name.CompareTo(size) == 0).id;
 
-                        if (variant.variant_option.FirstOrDefault(variant_option => variant_option.idOptionValue == idOption) == null) return false;
+                    filterList = productWithAttr
+                        .Where(p =>
+                        {
+                            foreach (var size in lstFilter_size)
+                            {
+                                if (p.attribute_name.CompareTo("size") != 0 || size.CompareTo(p.attribute_value) != 0) return false;
+                            }
+                            return true; 
+                        });
+                }
+
+                //Filter color
+                string filter_color = Request.Params["filter_color"];
+
+                var lstFilter_color = filter_color.Split(',');
+
+                if (lstFilter_color.Length > 0)
+                {
+                    if (filterList != null)
+                    {
+                        filterList = filterList
+                            .Where(p =>
+                            {
+                                foreach (var color in lstFilter_color)
+                                {
+                                    if (p.attribute_name.CompareTo("color") != 0 || color.CompareTo(p.attribute_value) != 0) return false;
+                                }
+                                return true;
+                            });
+                    }
+                    else
+                    {
+                        filterList = productWithAttr
+                            .Where(p =>
+                            {
+                                foreach (var size in lstFilter_size)
+                                {
+                                    if (p.attribute_name.CompareTo("color") != 0 || size.CompareTo(p.attribute_value) != 0) return false;
+                                }
+                                return true;
+                            });
                     }
 
-                    return true;
-                })
-                .ToList();
+                }
             }
-
+            catch (Exception)
+            {
+                throw;
+            }
 
             return View("");
         }
 
-        // GET: Product/Details/5
+
+        // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -59,19 +101,18 @@ namespace ecommerce.Controllers
             return View(product);
         }
 
-        // GET: Product/Create
+        // GET: Products/Create
         public ActionResult Create()
         {
-            ViewBag.idCategory = new SelectList(db.categories, "id", "name");
             return View();
         }
 
-        // POST: Product/Create
+        // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,idCategory")] product product)
+        public ActionResult Create([Bind(Include = "id,name,price")] product product)
         {
             if (ModelState.IsValid)
             {
@@ -80,11 +121,10 @@ namespace ecommerce.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.idCategory = new SelectList(db.categories, "id", "name", product.idCategory);
             return View(product);
         }
 
-        // GET: Product/Edit/5
+        // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -96,16 +136,15 @@ namespace ecommerce.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.idCategory = new SelectList(db.categories, "id", "name", product.idCategory);
             return View(product);
         }
 
-        // POST: Product/Edit/5
+        // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,idCategory")] product product)
+        public ActionResult Edit([Bind(Include = "id,name,price")] product product)
         {
             if (ModelState.IsValid)
             {
@@ -113,11 +152,10 @@ namespace ecommerce.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.idCategory = new SelectList(db.categories, "id", "name", product.idCategory);
             return View(product);
         }
 
-        // GET: Product/Delete/5
+        // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -132,7 +170,7 @@ namespace ecommerce.Controllers
             return View(product);
         }
 
-        // POST: Product/Delete/5
+        // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
