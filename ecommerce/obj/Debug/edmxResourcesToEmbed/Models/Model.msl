@@ -56,5 +56,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getAttributeProduct" FunctionName="product_has_attributeModel.Store.getAttributeProduct" />
   </EntityContainerMapping>
 </Mapping>

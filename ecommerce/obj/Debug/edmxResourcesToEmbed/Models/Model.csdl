@@ -137,6 +137,9 @@
       <End Role="variant_attribute" EntitySet="variant_attribute" />
     </AssociationSet>
     <FunctionImport Name="getProductWithAttribute" ReturnType="Collection(product_has_attributeModel.getProductWithAttribute_Result1)" />
+    <FunctionImport Name="getAttributeProduct" ReturnType="Collection(String)">
+      <Parameter Name="idProduct" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="getProductWithAttribute_Result">
     <Property Type="Int32" Name="id" Nullable="false" />

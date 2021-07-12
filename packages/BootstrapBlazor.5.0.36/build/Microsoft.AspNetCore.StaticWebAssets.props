@@ -1,0 +1,46 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAsset Include="$(MSBuildThisFileDirectory)..\staticwebassets\css\bootstrap.blazor.bundle.min.css">
+      <SourceType>Package</SourceType>
+      <SourceId>BootstrapBlazor</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/BootstrapBlazor</BasePath>
+      <RelativePath>css/bootstrap.blazor.bundle.min.css</RelativePath>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$(MSBuildThisFileDirectory)..\staticwebassets\js\bootstrap.blazor.bundle.min.js">
+      <SourceType>Package</SourceType>
+      <SourceId>BootstrapBlazor</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/BootstrapBlazor</BasePath>
+      <RelativePath>js/bootstrap.blazor.bundle.min.js</RelativePath>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$(MSBuildThisFileDirectory)..\staticwebassets\lib\summernote\font\summernote.eot">
+      <SourceType>Package</SourceType>
+      <SourceId>BootstrapBlazor</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/BootstrapBlazor</BasePath>
+      <RelativePath>lib/summernote/font/summernote.eot</RelativePath>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$(MSBuildThisFileDirectory)..\staticwebassets\lib\summernote\font\summernote.ttf">
+      <SourceType>Package</SourceType>
+      <SourceId>BootstrapBlazor</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/BootstrapBlazor</BasePath>
+      <RelativePath>lib/summernote/font/summernote.ttf</RelativePath>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$(MSBuildThisFileDirectory)..\staticwebassets\lib\summernote\font\summernote.woff">
+      <SourceType>Package</SourceType>
+      <SourceId>BootstrapBlazor</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/BootstrapBlazor</BasePath>
+      <RelativePath>lib/summernote/font/summernote.woff</RelativePath>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$(MSBuildThisFileDirectory)..\staticwebassets\lib\summernote\font\summernote.woff2">
+      <SourceType>Package</SourceType>
+      <SourceId>BootstrapBlazor</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/BootstrapBlazor</BasePath>
+      <RelativePath>lib/summernote/font/summernote.woff2</RelativePath>
+    </StaticWebAsset>
+  </ItemGroup>
+</Project>

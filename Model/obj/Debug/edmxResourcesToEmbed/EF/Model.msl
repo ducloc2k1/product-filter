@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="product_has_attributeModelStoreContainer" CdmEntityContainer="product_has_attributeEntities">
+    <EntitySetMapping Name="attributes">
+      <EntityTypeMapping TypeName="product_has_attributeModel.attribute">
+        <MappingFragment StoreEntitySet="attribute">
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="attribute_value" ColumnName="attribute_value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="variants">
+      <EntityTypeMapping TypeName="product_has_attributeModel.variant">
+        <MappingFragment StoreEntitySet="variant">
+          <ScalarProperty Name="imagePath" ColumnName="imagePath" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sku" ColumnName="sku" />
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="getAttributeProduct" FunctionName="product_has_attributeModel.Store.getAttributeProduct">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="product_has_attributeModel.getAttributeProduct_Result">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="attribute_value" ColumnName="attribute_value" />
+          <ScalarProperty Name="code" ColumnName="code" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getProductWithAttribute" FunctionName="product_has_attributeModel.Store.getProductWithAttribute">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="product_has_attributeModel.getProductWithAttribute_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="attribute_name" ColumnName="attribute_name" />
+          <ScalarProperty Name="attribute_value" ColumnName="attribute_value" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="orders">
+      <EntityTypeMapping TypeName="product_has_attributeModel.order">
+        <MappingFragment StoreEntitySet="order">
+          <ScalarProperty Name="ship_address" ColumnName="ship_address" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="ship_email" ColumnName="ship_email" />
+          <ScalarProperty Name="ship_mobile" ColumnName="ship_mobile" />
+          <ScalarProperty Name="ship_name" ColumnName="ship_name" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="product_has_attributeModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="order_detail">
+      <EntityTypeMapping TypeName="product_has_attributeModel.order_detail">
+        <MappingFragment StoreEntitySet="order_detail">
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="id_order" ColumnName="id_order" />
+          <ScalarProperty Name="id_variant" ColumnName="id_variant" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="getVariantBySku" FunctionName="product_has_attributeModel.Store.getVariantBySku" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="product_has_attributeModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="product_has_attributeModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="product_has_attributeModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="product_has_attributeModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="product_has_attributeModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="product_has_attributeModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="product_has_attributeModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="product_has_attributeModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="product_has_attributeModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="getProductById" FunctionName="product_has_attributeModel.Store.getProductById" />
+    <EntitySetMapping Name="product_attribute">
+      <EntityTypeMapping TypeName="product_has_attributeModel.product_attribute">
+        <MappingFragment StoreEntitySet="product_attribute">
+          <ScalarProperty Name="attribute_id" ColumnName="attribute_id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="variant_attribute">
+      <EntityTypeMapping TypeName="product_has_attributeModel.variant_attribute">
+        <MappingFragment StoreEntitySet="variant_attribute">
+          <ScalarProperty Name="attribute_id" ColumnName="attribute_id" />
+          <ScalarProperty Name="variant_id" ColumnName="variant_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="product_has_attributeModel.product">
+        <MappingFragment StoreEntitySet="product">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="gallery" ColumnName="gallery" />
+          <ScalarProperty Name="sale_price" ColumnName="sale_price" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

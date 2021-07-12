@@ -18,6 +18,13 @@ namespace ecommerce
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            
+            //Cart
+            //routes.MapRoute(
+            //    name: "Default",
+            //    url: "add-to-cart",
+            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            //);
         }
     }
 }

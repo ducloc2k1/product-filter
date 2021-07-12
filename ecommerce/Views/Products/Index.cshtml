@@ -1,40 +1,96 @@
-﻿@model IEnumerable<ecommerce.Models.product>
-
+﻿
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+@*@model List<Model>*@
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.price)
-        </th>
-        <th></th>
-    </tr>
+<section class="filter">
+    <div class="container">
+        <div class="filter-list row">
+            <div class="filter-item filter-search col-md-3 px-3">
+                <h2 class="filter-title">By Title</h2>
+                <div class="filter-content">
+                    <input type="text" placeholder="Search for product title" value="" class="filter-input-text" />
+                    <button class="filter-button-search filter-button">filter</button>
+                </div>
+            </div>
+            <div class="filter-item filter-price col-md-3 px-3">
+                <h2 class="filter-title">By Price</h2>
+                <div class="filter-content">
+                    <div class="slider-container">
+                        <div class="slider-track">
+                            <input type="range" min="0" max="100" value="30" id="slider-1" oninput="slideOne()">
+                            <input type="range" min="0" max="100" value="70" id="slider-2" oninput="slideTwo()">
+                        </div>
+                    </div>
+                    <div class="values">
+                        Price:
+                        <span id="range1">
+                            0
+                        </span>
+                        <span>  —  </span>
+                        <span id="range2">
+                            100
+                        </span>
+                    </div>
+                    <button class="filter-button-price filter-button">filter</button>
+                </div>
+            </div>
+            <div class="filter-item filter-size col-md-3 px-3">
+                <h2 class="filter-title">By Size</h2>
+                <div class="filter-content">
+                    <ul class="filter-size-list p-0">
+                        @foreach (var attribute in Model)
+                        {
+                            if (attribute.name == "size")
+                            {
+                                <li class="filter-size-item">
+                                    <label class="checkbox-container">
+                                        <input name="filter_size" value=@(attribute.attribute_value) type="checkbox" @(Request.Params["filter_size"]?.IndexOf(attribute.attribute_value) > -1 ? "checked" : "") onChange="handleOnChange(this)" />
+                                        <span class="filter-value">@attribute.attribute_value</span>
+                                        <span class="check-mark"></span>
+                                        <span class="product-count"></span>
+                                    </label>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="filter-item filter-color col-md-3 px-3">
+                <h2 class="filter-title">By Color</h2>
+                <div class="filter-content">
+                    <ul class="filter-color-list p-0">
+                        @foreach (var attribute in Model)
+                        {
+                            if (attribute.name == "color")
+                            {
+                                <li class="filter-color-item">
+                                    <label class="checkbox-container">
+                                        <input name="filter_color" value=@(attribute.attribute_value) type="checkbox" @(Request.Params["filter_size"]?.IndexOf(attribute.attribute_value) > -1 ? "checked" : "") onChange="handleOnChange(this)" />
+                                        <span class="filter-value">@attribute.attribute_value</span>
+                                        <span class="check-mark"></span>
+                                        <span class="product-count"></span>
+                                    </label>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.price)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
+<section class="products" id="list-product">
+</section>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/Product_Script/FilterProduct.js")
 }
 
-</table>
+<p id="filter_button">click de filter</p>
+
+

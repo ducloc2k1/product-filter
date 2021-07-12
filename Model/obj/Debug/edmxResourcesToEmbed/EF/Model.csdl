@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="product_has_attributeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="attribute">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="attribute_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="variant">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sku" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="idProduct" Type="Int32" />
+    <NavigationProperty Name="order_detail" Relationship="product_has_attributeModel.FK_order_detail_variant" FromRole="variant" ToRole="order_detail" />
+    <Property Name="imagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="product_has_attributeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="attributes" EntityType="Self.attribute" />
+    <EntitySet Name="variants" EntityType="Self.variant" />
+    <FunctionImport Name="getAttributeProduct" ReturnType="Collection(product_has_attributeModel.getAttributeProduct_Result)">
+      <Parameter Name="idProduct" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getProductWithAttribute" ReturnType="Collection(product_has_attributeModel.getProductWithAttribute_Result)" />
+    <EntitySet Name="orders" EntityType="product_has_attributeModel.order" />
+    <EntitySet Name="sysdiagrams" EntityType="product_has_attributeModel.sysdiagram" />
+    <EntitySet Name="order_detail" EntityType="product_has_attributeModel.order_detail" />
+    <AssociationSet Name="FK_order_detail_order" Association="product_has_attributeModel.FK_order_detail_order">
+      <End Role="order" EntitySet="orders" />
+      <End Role="order_detail" EntitySet="order_detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_order_detail_variant" Association="product_has_attributeModel.FK_order_detail_variant">
+      <End Role="variant" EntitySet="variants" />
+      <End Role="order_detail" EntitySet="order_detail" />
+    </AssociationSet>
+    <FunctionImport Name="getVariantBySku" EntitySet="variants" ReturnType="Collection(product_has_attributeModel.variant)">
+      <Parameter Name="idProduct" Mode="In" Type="Int32" />
+      <Parameter Name="sku" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(product_has_attributeModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(product_has_attributeModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="getProductById" EntitySet="products" ReturnType="Collection(product_has_attributeModel.product)">
+      <Parameter Name="idProduct" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="product_attribute" EntityType="product_has_attributeModel.product_attribute" />
+    <EntitySet Name="variant_attribute" EntityType="product_has_attributeModel.variant_attribute" />
+    <EntitySet Name="products" EntityType="product_has_attributeModel.product" />
+  </EntityContainer>
+  <ComplexType Name="getProductWithAttribute_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="attribute_name" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="attribute_value" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="order">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+    <Property Name="ship_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ship_mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ship_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Int32" />
+    <NavigationProperty Name="order_detail" Relationship="product_has_attributeModel.FK_order_detail_order" FromRole="order" ToRole="order_detail" />
+    <Property Name="ship_address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="order_detail">
+    <Key>
+      <PropertyRef Name="id_variant" />
+    </Key>
+    <Property Name="id_variant" Type="Int32" Nullable="false" />
+    <Property Name="id_order" Type="Int32" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="order" Relationship="product_has_attributeModel.FK_order_detail_order" FromRole="order_detail" ToRole="order" />
+    <NavigationProperty Name="variant" Relationship="product_has_attributeModel.FK_order_detail_variant" FromRole="order_detail" ToRole="variant" />
+  </EntityType>
+  <Association Name="FK_order_detail_order">
+    <End Type="product_has_attributeModel.order" Role="order" Multiplicity="0..1" />
+    <End Type="product_has_attributeModel.order_detail" Role="order_detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="order">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="order_detail">
+        <PropertyRef Name="id_order" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_order_detail_variant">
+    <End Type="product_has_attributeModel.variant" Role="variant" Multiplicity="1" />
+    <End Type="product_has_attributeModel.order_detail" Role="order_detail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="variant">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="order_detail">
+        <PropertyRef Name="id_variant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="getVariantBySku_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="sku" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="idProduct" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getProductById_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="price" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="getAttributeProduct_Result">
+    <Property Type="String" Name="name" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="attribute_value" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="product_attribute">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_id" Type="Int32" />
+    <Property Name="attribute_id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="variant_attribute">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="variant_id" Type="Int32" />
+    <Property Name="attribute_id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="sale_price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="gallery" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Byte" />
+  </EntityType>
+</Schema>

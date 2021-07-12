@@ -2,30 +2,203 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div class="container-xxl product-page-container">
+    <div class="row">
+        @*load product from controller*@
+        @foreach (var productAttr in Model)
+        {
+            <div class="item col-6 col-sm-6 col-md-3">
+                <div class="item-content">
+                    <div class="wishlist-button">
+                        <i class="fal fa-heart"></i>
+                    </div>
+                    @if (productAttr.product.status > 0)
+                    {<div class="item-new"> <p>New</p> </div>}
+                    @if (productAttr.product.sale_price > 0)
+                    {<div class="item-sale"> <p>-@(productAttr.salePercent)%</p></div>}
+                    <ul class="button-list">
+                        <li class="item-button">
+                            <p class="item-button-text">Quick View</p>
+                            <i class="far fa-eye item-button-icon"></i>
+                        </li>
+                        <li class="item-button">
+                            <a href="/Cart/AddItem?idProduct=1&quantity=2&color=pink&size=x" class="add-to-cart">
+                                <p class="item-button-text">Quick Shop</p>
+                                <i class="far fa-shopping-cart item-button-icon"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="item-img">
+                        <image src=@Url.Content(productAttr.listGallery[0]) class="item-img-first"></image>
+                        <image src=@Url.Content(productAttr.listGallery[1]) class="item-img-second"></image>
+                    </div>
+                    <div class="size-list">@String.Join(", ", productAttr.size)</div>
+                    <div class="item-overlay"></div>
+                </div>
+                <h3 class="item-name">@productAttr.product.name</h3>
+                <div class="d-flex mb-1">
+                    @if (productAttr.product.sale_price > 0)
+                    {
+                        <p class="item-money me-1 mb-0">$@productAttr.product.price</p>
+                        <p class="item-money-sale mb-0">$@productAttr.product.sale_price</p>
+                    }
+                    else
+                    {
+                        <p class="item-price mb-0">$@productAttr.product.price</p>
+                    }
+                </div>
+                <ul class="color-list">
+                    @foreach (var color in productAttr.listColorCode)
+                    {
+                        <li class="item-color">
+                            <label for="">
+                                <input name="color" type="radio">
+                                <span class="radio-mark">
+                                    <span style="background-color : @color" class="radio-mark-sub"></span>
+                                </span>
+                            </label>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+
+
+        @*<div class="item col-md-3">
+                <div class="item-content">
+                    <div class="wishlist-button">
+                        <i class="fal fa-heart"></i>
+                    </div>
+                    <div class="item-sale item-new">-34%</div>
+                    <ul class="button-list">
+                        <li class="item-button">
+                            <p class="item-button-text">Quick View</p>
+                            <i class="far fa-eye item-button-icon"></i>
+                        </li>
+                        <li class="item-button">
+                            <a href="" class="add-to-cart">
+                                <p class="item-button-text">Quick Shop</p>
+                                <i class="far fa-shopping-cart item-button-icon"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="item-img">
+                        <image src=@Url.Content("~/assets/images/first_watch_image.jpg") class="item-img-first"></image>
+                        <image src=@Url.Content("~/assets/images/second_watch_image.jpg") class="item-img-second"></image>
+                    </div>
+                    <div class="item-overlay"></div>
+                </div>
+                <h3 class="item-name">Analogue Resin Strap</h3>
+                <p class="item-price">$30.00</p>
+                <ul class="color-list">
+                    <li class="item-color">
+                        <label for="">
+                            <input name="color" type="radio">
+                            <span class="radio-mark">
+                                <span class="radio-mark-sub"></span>
+                            </span>
+                        </label>
+                    </li>
+                    <li class="item-color">
+                        <label for="">
+                            <input name="color" type="radio">
+                            <span class="radio-mark">
+                                <span class="radio-mark-sub"></span>
+                            </span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="item col-md-3">
+                <div class="item-content">
+                    <div class="wishlist-button">
+                        <i class="fal fa-heart"></i>
+                    </div>
+                    <div class="item-sale item-new"> New </div>
+                    <ul class="button-list">
+                        <li class="item-button">
+                            <p class="item-button-text">Quick View</p>
+                            <i class="far fa-eye item-button-icon"></i>
+                        </li>
+                        <li class="item-button">
+                            <a href="" class="add-to-cart">
+                                <p class="item-button-text">Quick Shop</p>
+                                <i class="far fa-shopping-cart item-button-icon"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="item-img">
+                        <image src=@Url.Content("~/assets/images/first_ridley_image.jpg") class="item-img-first"></image>
+                        <image src=@Url.Content("~/assets/images/second_ridley_image.jpg") class="item-img-second"></image>
+                    </div>
+                    <div class="item-overlay"></div>
+                </div>
+                <h3 class="item-name">Analogue Resin Strap</h3>
+                <p class="item-price">$30.00</p>
+                <ul class="color-list">
+                    <li class="item-color">
+                        <label for="">
+                            <input name="color" type="radio">
+                            <span class="radio-mark">
+                                <span class="radio-mark-sub"></span>
+                            </span>
+                        </label>
+                    </li>
+                    <li class="item-color">
+                        <label for="">
+                            <input name="color" type="radio">
+                            <span class="radio-mark">
+                                <span class="radio-mark-sub"></span>
+                            </span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="item col-md-3">
+                <div class="item-content">
+                    <div class="wishlist-button">
+                        <i class="fal fa-heart"></i>
+                    </div>
+                    <div class="item-new item-sale"> New </div>
+                    <ul class="button-list">
+                        <li class="item-button">
+                            <p class="item-button-text">Quick View</p>
+                            <i class="far fa-eye item-button-icon"></i>
+                        </li>
+                        <li class="item-button">
+                            <a href="" class="add-to-cart">
+                                <p class="item-button-text">Quick Shop</p>
+                                <i class="far fa-shopping-cart item-button-icon"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="item-img">
+                        <image src=@Url.Content("~/assets/images/first_pant_image.jpg") class="item-img-first"></image>
+                        <image src=@Url.Content("~/assets/images/second_pant_image.jpg") class="item-img-second"></image>
+                    </div>
+                    <div class="item-overlay"></div>
+                </div>
+                <h3 class="item-name">Analogue Resin Strap</h3>
+                <p class="item-price">$30.00</p>
+                <ul class="color-list">
+                    <li class="item-color">
+                        <label for="">
+                            <input name="color" type="radio">
+                            <span class="radio-mark">
+                                <span class="radio-mark-sub"></span>
+                            </span>
+                        </label>
+                    </li>
+                    <li class="item-color">
+                        <label for="">
+                            <input name="color" type="radio">
+                            <span class="radio-mark">
+                                <span class="radio-mark-sub"></span>
+                            </span>
+                        </label>
+                    </li>
+                </ul>
+            </div>*@
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>

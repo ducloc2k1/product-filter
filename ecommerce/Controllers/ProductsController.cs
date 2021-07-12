@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using ecommerce.Models;
+using Model.Dao;
+using Model.EF;
 
 namespace ecommerce.Controllers
 {
@@ -14,75 +11,14 @@ namespace ecommerce.Controllers
     {
         private product_has_attributeEntities db = new product_has_attributeEntities();
 
+        private ProductDao productDao = new ProductDao();
+
         // GET: Products
         public ActionResult Index()
         {
-            IEnumerable<getProductWithAttribute_Result1> filterList = null;
+            var attributeList = db.attributes.ToList();
 
-            try
-            {
-                var productWithAttr = db.getProductWithAttribute().ToList();
-
-                string filter_size = Request.Params["filter_size"];
-
-                //Filter size
-                var lstFilter_size = filter_size.Split(',');
-
-
-                if (lstFilter_size.Length > 0)
-                {
-
-                    filterList = productWithAttr
-                        .Where(p =>
-                        {
-                            foreach (var size in lstFilter_size)
-                            {
-                                if (p.attribute_name.CompareTo("size") != 0 || size.CompareTo(p.attribute_value) != 0) return false;
-                            }
-                            return true; 
-                        });
-                }
-
-                //Filter color
-                string filter_color = Request.Params["filter_color"];
-
-                var lstFilter_color = filter_color.Split(',');
-
-                if (lstFilter_color.Length > 0)
-                {
-                    if (filterList != null)
-                    {
-                        filterList = filterList
-                            .Where(p =>
-                            {
-                                foreach (var color in lstFilter_color)
-                                {
-                                    if (p.attribute_name.CompareTo("color") != 0 || color.CompareTo(p.attribute_value) != 0) return false;
-                                }
-                                return true;
-                            });
-                    }
-                    else
-                    {
-                        filterList = productWithAttr
-                            .Where(p =>
-                            {
-                                foreach (var size in lstFilter_size)
-                                {
-                                    if (p.attribute_name.CompareTo("color") != 0 || size.CompareTo(p.attribute_value) != 0) return false;
-                                }
-                                return true;
-                            });
-                    }
-
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return View("");
+            return View(attributeList);
         }
 
 
@@ -188,6 +124,15 @@ namespace ecommerce.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        //FILTER: Filter
+
+        public JsonResult Filter()
+        {
+            var products = productDao.filterProduct().ToList();
+
+            return Json(products, JsonRequestBehavior.AllowGet);
         }
     }
 }

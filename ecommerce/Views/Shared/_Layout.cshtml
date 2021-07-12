@@ -5,38 +5,176 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Product/Product.css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link href="~/Content/Font-7/Pe-icon-7-stroke.css" rel="stylesheet"/>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+    <header>
+        <div class="top-menu">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 top-menu-left justify-content-sm-center justify-content-lg-start d-sm-flex">
+                        <ul class="top-menu-list">
+                            <li class="top-menu-item">
+                                <i class="top-menu-icon fal fa-phone-alt"></i>
+                                <span class="top-menu-text"> +01 23456789 </span>
+                            </li>
+                            <li class="top-menu-item">
+                                <i class="top-menu-icon fal fa-envelope"></i>
+                                <span class="top-menu-text">Kalles@domain.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 top-menu-center">
+                        <p class="top-menu-content">
+                            Summer sale discount off <span>50%</span>! <a href="#">Shop Now</a>
+                        </p>
+                    </div>
+                    <div class="col-lg-4 top-menu-right justify-content-sm-center d-sm-flex justify-content-lg-end">
+                        <ul class="top-menu-list">
+                            <li class="top-menu-item">
+                                <span class="top-menu-text">English</span>
+                                <i class="top-menu-icon"></i>
+                            </li>
+                            <li class="top-menu-item m-0">
+                                <span class="top-menu-text">USD</span>
+                                <i class="top-menu-icon"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
+        <nav class="main-nav">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 d-sm-flex col-lg-3 d-lg-none align-items-center justify-content-start sidebar-open" id="sidebar-open">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="16" viewBox="0 0 30 16">
+                            <rect width="30" height="1.5"></rect>
+                            <rect y="7" width="20" height="1.5"></rect>
+                            <rect y="14" width="30" height="1.5"></rect>
+                        </svg>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-md-6 justify-content-sm-center justify-content-lg-start nav-left align-items-center d-flex nav-logo-container">
+                        <img src="~/assets/images/logo/kalles.svg" alt="" class="nav-logo" />
+                    </div>
+                    <div class="d-sm-none d-lg-flex col-lg-6 nav-center">
+                        <ul class="nav-list">
+                            <li class="nav-item"><a class="nav-link">demo</a></li>
+                            <li class="nav-item"><a class="nav-link">shop</a></li>
+                            <li class="nav-item"><a class="nav-link">product</a></li>
+                            <li class="nav-item"><a class="nav-link">sale</a></li>
+                            <li class="nav-item"><a class="nav-link">portfolio</a></li>
+                            <li class="nav-item"><a class="nav-link">LookBook</a></li>
+                            <li class="nav-item"><a class="nav-link">blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3 nav-right">
+                        <a href="" class="nav-link">
+                            <i class="fal fa-search nav-right-icon"></i>
+                        </a>
+                        <a href="" class="nav-link">
+                            <i class="fal fa-user nav-right-icon"></i>
+                        </a>
+                        <a href="" class="nav-link">
+                            <i class="fal fa-heart nav-right-icon"></i>
+                        </a>
+                        <a href="" class="nav-link">
+                            <i class="fal fa-shopping-cart nav-right-icon"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div id="sidebar">
+            <ul class="nav nav-pills sidebar" id="pills-tab" role="tablist">
+                <li class="nav-item sidebar-item" role="presentation">
+                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
+                </li>
+                <li class="nav-item sidebar-item" role="presentation">
+                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <ul class="tab-list">
+                        <li class="tab-item">
+                            <span class="tab-text">Demo</span>
+                            <span class="tab-icon-right far fa-plus"></span>
+                        </li>
+                        <li class="tab-item">
+                            <span class="tab-text">Shop</span>
+                            <span class="tab-icon-right"></span>
+                        </li>
+                        <li class="tab-item">
+                            <span class="tab-text">Product</span>
+                            <span class="tab-icon-right far fa-plus"></span>
+                        </li>
+                        <li class="tab-item">
+                            <span class="tab-text">Sale</span>
+                            <span class="tab-icon-right far fa-plus"></span>
+                        </li>
+                        <li class="tab-item">
+                            <span class="tab-text">Portfolio</span>
+                            <span class="tab-icon-right"></span>
+                        </li>
+                        <li class="tab-item">
+                            <span class="tab-text">Blog</span>
+                            <span class="tab-icon-right far fa-plus"></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <ul class="cat-list">
+                        <li class="cat-item">
+                            <span class="cat-icon far fa-female"></span>
+                            <span class="tab-text">Women’s Clothing</span>
+                        </li>
+                        <li class="cat-item">
+                            <span class="cat-icon far fa-male"></span>
+                            <span class="tab-text">Men’s Clothing</span>
+                        </li>
+                        <li class="cat-item">
+                            <span class="cat-icon far fa-clock"></span>
+                            <span class="tab-text">Watches</span>
+                        </li>
+                        <li class="cat-item">
+                            <span class="cat-icon far fa-glasses-alt"></span>
+                            <span class="tab-text">Acessories</span>
+                        </li>
+                        <li class="cat-item">
+                            <span class="cat-icon far fa-camera"></span>
+                            <span class="tab-text">Electric</span>
+                        </li>
+                        <li class="cat-item">
+                            <span class="cat-icon far fa-shoe-prints"></span>
+                            <span class="tab-text">Shoes</span>
+                        </li>
+                        <li class="cat-item">
+                            <span class="cat-icon far fa-chair"></span>
+                            <span class="tab-text">Decor</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <span class="close-sidebar pe-7s-close"></span>
+        </div>
+        <div id="mask-overlay" class="mask-overlay"></div>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+    <hr />
+    <footer>
+        Day la footer
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/Home_Script/Home.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>

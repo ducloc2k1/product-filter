@@ -242,8 +242,12 @@ C:\Users\Hai Phuong\source\repos\product-filter\ecommerce\bin\System.Web.WebPage
 C:\Users\Hai Phuong\source\repos\product-filter\ecommerce\bin\Newtonsoft.Json.xml
 C:\Users\Hai Phuong\source\repos\product-filter\ecommerce\bin\Antlr3.Runtime.pdb
 C:\Users\Hai Phuong\source\repos\product-filter\ecommerce\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Hai Phuong\source\repos\product-filter\ecommerce\obj\Debug\ecommerce.csproj.AssemblyReference.cache
 C:\Users\Hai Phuong\source\repos\product-filter\ecommerce\obj\Debug\ecommerce.csproj.CoreCompileInputs.cache
 C:\Users\Hai Phuong\source\repos\product-filter\ecommerce\obj\Debug\ecommerce.csproj.CopyComplete
 C:\Users\Hai Phuong\source\repos\product-filter\ecommerce\obj\Debug\ecommerce.dll
 C:\Users\Hai Phuong\source\repos\product-filter\ecommerce\obj\Debug\ecommerce.pdb
+C:\Users\Hai Phuong\source\repos\product-filter\ecommerce\bin\Model.dll
+C:\Users\Hai Phuong\source\repos\product-filter\ecommerce\bin\Model.pdb
+C:\Users\Hai Phuong\source\repos\product-filter\ecommerce\bin\Model.dll.config
+C:\Users\Hai Phuong\source\repos\product-filter\ecommerce\obj\Debug\ecommerce.csproj.AssemblyReference.cache
+C:\Users\Hai Phuong\source\repos\product-filter\ecommerce\bin\Json.Net.dll
